@@ -2,25 +2,25 @@
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
 #include "cardDeck.h"
+#include <vector>
 using namespace std;
 
-const int NUM_OF_CARDS = 52;
+const int NUM_OF_CARDS = 52; //club, spade, ace, diamond 0 = A club 12 = K club, 13 = A spade
 const int NUM_OF_SUIT_CARDS = 14;
 const int NUM_OF_SUITS = 4;
 
 CardDeck::CardDeck()
 {
-	head = NULL;
-	initializeDeck();
+	randomizeList();
 }
 
 void CardDeck::initializeDeck()
 {
-	for (int i = 1; i <= NUM_OF_SUITS; i++) 
+	for (int i = 0; i <= NUM_OF_SUITS; i++) 
 	{
-		for (int i1 = 2; i1 <= NUM_OF_SUIT_CARDS; i1++) /*start is 2 and final is ace (14)*/
+		for (int i1 = 0; i1 < NUM_OF_SUIT_CARDS; i1++) /*start is ace and final is king (13)*/
 		{
-			appendNode(i, i1);
+			cardUsed[NUM_OF_SUITS][NUM_OF_SUIT_CARDS] = true;
 		}
 	}
 }
@@ -69,9 +69,19 @@ CardDeck::~CardDeck()
 
 void CardDeck::randomizeList()
 {
-	int randSuit;
-	int randSuitNum; //ex club 9 randSuit is 0, randSuitNum is 9
-	int cardsLeft[NUM_OF_SUITS] = { NUM_OF_SUIT_CARDS, NUM_OF_SUIT_CARDS, NUM_OF_SUIT_CARDS, NUM_OF_SUIT_CARDS };
+	vector<int> randCard(NUM_OF_CARDS);
+	
+	for (int i = 0; i < NUM_OF_CARDS; i++)
+	{
+		randCard.push_back(i);
+	}
+
+
+	int length = sizeof(randCard) / sizeof(int);
+	int randomNumber = randCard[rand() % length]; // 
+	randCard.erase(randCard.begin() + (randomNumber - 1));
+
+
 	bool cardComboUsed[NUM_OF_SUITS][NUM_OF_SUIT_CARDS];
 	// 0 = club, 1 = spades, 2 = hearts, 3 = diamonds
 	int usedCombos[NUM_OF_SUITS][NUM_OF_SUIT_CARDS];
@@ -82,10 +92,13 @@ void CardDeck::randomizeList()
 		{
 			randSuit = 1 + rand() % NUM_OF_SUITS;
 			randSuitNum = 1 + rand() % NUM_OF_SUIT_CARDS; 
-		} while (!usedCombos[NUM_OF_SUITS][NUM_OF_SUIT_CARDS]);
+		} while (!cardComboUsed[NUM_OF_SUITS][NUM_OF_SUIT_CARDS]);
+
+		card[randSuit][randSuitNum];
+		cardsLeft[randSuit] -= 1;
+		cardComboUsed[randSuit][randSuitNum] = true; // ex [3][11] Heart of JAck used
 	} 
 
-	appendNode(randSuit, randSuitNum);
-	cardsLeft[randSuit] -= 1;
-	cardComboUsed[randSuit][randSuitNum] = true // ex [3][11] Heart of JAck used
+	
+	
 }

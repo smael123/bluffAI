@@ -4,19 +4,15 @@
 
 using namespace std;
 
+const int NUM_OF_CARDS = 52; //club, spade, ace, diamond
+const int NUM_OF_SUIT_CARDS = 14;
+const int NUM_OF_SUITS = 4;
+
 class CardDeck
 {
 private:
-	struct deckNode
-	{
-		int suit; //1 = club, 2 = spades, 3 = hearts, 4 = diamonds
-		int cardNumber;
-		struct deckNode *next;
-		
-	};
-
-	deckNode *head;
-
+	bool cardUsed[NUM_OF_SUITS][NUM_OF_CARDS]; //if true then it has NOT been used
+	int card[NUM_OF_SUITS][NUM_OF_SUIT_CARDS];
 public:
 	CardDeck();
 	~CardDeck();

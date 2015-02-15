@@ -78,10 +78,14 @@
   <ItemGroup>
     <ClInclude Include="bluffCaller.h" />
     <ClInclude Include="cardDeck.h" />
+    <ClInclude Include="dealer.h" />
+    <ClInclude Include="player.h" />
+    <ClInclude Include="vegeta.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cardDeck.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="vegeta.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
