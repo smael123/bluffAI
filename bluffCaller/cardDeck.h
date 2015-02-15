@@ -1,6 +1,8 @@
 #ifndef CARD_DECK_H
 #define CARD_DECK_H
 #include <iostream>
+#include <algorithim>
+#include <vector>
 
 using namespace std;
 
@@ -11,16 +13,25 @@ const int NUM_OF_SUITS = 4;
 class CardDeck
 {
 private:
-	bool cardUsed[NUM_OF_SUITS][NUM_OF_CARDS]; //if true then it has NOT been used
-	int card[NUM_OF_SUITS][NUM_OF_SUIT_CARDS];
+	vector<int> card;
 public:
-	CardDeck();
+	CardDeck()
+	{
+		initializeDeck();
+	}
 	~CardDeck();
-	void appendNode(int, int);
-	void deleteNode(int, int);
-	void initializeDeck();
+	void initializeDeck()
+	{
+		for (int i = 0; i < NUM_OF_CARDS; i++)
+		{
+			card.push_back(i);
+		}
+	};
 	void displayList() const;
-	void randomizeList();
+	void shuffleDeck()
+	{
+		random_shuffle(card.begin(), card.end());
+	};
 };
 
 #endif

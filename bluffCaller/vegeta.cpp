@@ -36,3 +36,14 @@ void Vegeta::setBlindRaisingConfidence(int playConf) //maybe later add amount of
 {
 	blindRaisingConfidence = playConf;
 }
+
+void Vegeta::playerWins(int x, int y)
+{
+	if (blindBet)
+	{
+		setBlindRaisingConfidence();
+	}
+	confRangeMin = x;
+	confRangeMax = y;
+
+}
